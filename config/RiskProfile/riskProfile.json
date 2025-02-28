@@ -1,0 +1,183 @@
+[
+  {
+    "minScore": 6,
+    "maxScore": 10,
+    "preReturn" : "7",
+    "profile": "Conservative Risk Profile (Low risk tolerance)",
+    "riskBasedAssetAllocation" :{
+    "bonds" : {
+      "government" : "40",
+      "corporate" : "20"
+    },
+    "equities" : {
+      "flexicap_Multicap" : "0",
+      "largeCap_Midcap" : {
+        "largeCap" : "15",
+        "midcap" : "0"
+      },
+      "smallCap" : "0",
+      "internationalIndexFund" : "10",
+      "sectorSpecificFund" : "0"
+    },
+    "cash" :{
+      "moneyMarket" : "5",
+      "shortTermFunds" : "5"
+    },
+    "commodity" : {
+      "goldSilver" : "5"
+    },
+    "assetAllocation": {
+      "bondsDebtInstruments": "60",
+      "equitiesStocks": "10",
+      "cashCashEquivalents": "20",
+      "gold": "10"
+    }
+  }
+  },
+  {
+    "minScore": 11,
+    "maxScore": 15,
+    "preReturn" : "8.5",
+    "profile": "Moderate Conservative Risk Profile",
+    "riskBasedAssetAllocation" :{
+      "bonds" : {
+        "government" : "30",
+        "corporate" : "20"
+      },
+      "equities" : {
+        "flexicap_Multicap" : "0",
+        "largeCap_Midcap" : {
+          "largeCap" : "20",
+          "midcap" : "5"
+        },
+        "smallCap" : "0",
+        "internationalIndexFund" : "10",
+        "sectorSpecificFund" : "0"
+      },
+      "cash" :{
+        "moneyMarket" : "5",
+        "shortTermFunds" : "5"
+      },
+      "commodity" : {
+        "goldSilver" : "5"
+      },
+      "assetAllocation": {
+      "bondsDebtInstruments": "55",
+      "equitiesStocks": "25",
+      "cashCashEquivalents": "10",
+      "gold": "10"
+    }
+  }
+    
+  },
+  {
+    "minScore": 16,
+    "maxScore": 20,
+    "preReturn" : "10",
+    "profile": "Balanced Risk Profile",
+    "riskBasedAssetAllocation" :{
+      "bonds" : {
+        "government" : "20",
+        "Corporate" : "20"
+      },
+      "equities" : {
+        "flexicap_Multicap" : "15",
+        "largeCap_Midcap" : {
+          "largeCap" : "15",
+          "midcap" : "5"
+        },
+        "smallCap" : "0",
+        "internationalIndexFund" : "10",
+        "sectorSpecificFund" : "0"
+      },
+      "cash" :{
+        "moneyMarket" : "5",
+        "shortTermFunds" : "5"
+      },
+      "commodity" : {
+        "goldSilver" : "5"
+      },
+      "assetAllocation": {
+      "bondsDebtInstruments": "40",
+      "equitiesStocks": "40",
+      "cashCashEquivalents": "10",
+      "gold": "10"
+      }
+    }
+    
+  },
+  {
+    "minScore": 21,
+    "maxScore": 25,
+    "preReturn" : "12",
+    "profile": "Aggressive Risk Profile",
+    "riskBasedAssetAllocation" :{
+      "bonds" : {
+        "government" : "15",
+        "corporate" : "15"
+      },
+      "equities" : {
+        "flexicap_Multicap" : "20",
+        "largeCap_Midcap" : {
+          "largeCap" : "10",
+          "midcap" : "5"
+        },
+        "smallCap" : "5",
+        "internationalIndexFund" : "10",
+        "sectorSpecificFund" : "5"
+      },
+      "cash" :{
+        "moneyMarket" : "5",
+        "shortTermFunds" : "5"
+      },
+      "commodity" : {
+        "goldSilver" : "5"
+      },
+      "assetAllocation": {
+      "bondsDebtInstruments": "20",
+      "equitiesStocks": "65",
+      "cashCashEquivalents": "5",
+      "gold": "10"
+      }
+    }
+    
+  },
+  {
+    "minScore": 26,
+    "maxScore": 30,
+    "profile": "Very Aggressive Risk Profile (High risk tolerance)",
+    "preReturn" : "15",
+    "riskBasedAssetAllocation" :{
+      "bonds" : {
+        "government" : "10",
+        "corporate" : "10"
+      },
+      "equities" : {
+        "flexicap_Multicap" : "25",
+        "largeCap_Midcap" : {
+          "largeCap" : "10",
+          "midcap" : "5"
+        },
+        "smallCap" : "5",
+        "internationalIndexFund" : "10",
+        "sectorSpecificFund" : "10"
+      },
+      "cash" :{
+        "moneyMarket" : "5",
+        "shortTermFunds" : "5"
+      },
+      "commodity" : {
+        "goldSilver" : "5"
+      },
+      "assetAllocation": {
+      "bondsDebtInstruments": "10",
+      "equitiesStocks": "60",
+      "cashCashEquivalents": "10",
+      "gold": "20"
+      }
+    }
+    
+  }
+]
+
+

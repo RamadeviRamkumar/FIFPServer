@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="border: 1px solid black; display: flex; align-items: center">
+      <div
+        style="
+          display: -webkit-flex;
+          display: flex;
+          -webkit-flex-direction: row;
+          flex-direction: row;
+          align-items: baseline;
+          margin: 0;
+        "
+      >
+        <img
+          style="width: 160px; height: 150px;position: relative;
+      top: -15px;"
+          src="<%= imageuri %>"
+          alt="logo"
+        />
+          <h2
+            style="
+              color: rgb(157, 50, 199);
+              font-size: 26px;
+              padding-top: 10px;
+              padding-left: 15px;
+            "
+          >
+            FINANCIAL INDEPENDENT FOCUS PASSION
+          </h2>
+      </div>
+      <span style="display: block;text-align: right; margin-right: 30px; position: relative;top: -45px;">
+        <strong>Name :</strong> <%= userName.firstName %> <%= userName.lastName %></span>
+      <span style="display: block;margin-left: 20px; position: relative;top: -63px;">
+        <strong>Date : </strong> <%= date %>, <%= time %></span>
+
+     <hr style="border: 1px solid rgb(12, 12, 12);position: relative;
+          top: -50px;">
+      <h2
+        style="
+          color: rgba(212, 31, 31, 0.966);
+          text-align: center;
+          font-size: 18px;
+          margin: 0;
+          position: relative;
+          top: -40px;
+        "
+      >
+       Retirement Plan
+      </h2>
+      <div
+        style="
+          text-align: center;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center; 
+          position: relative;
+          top: -20px;
+        "
+      >
+        <table
+          style="
+            border: 1px solid #8d8d8d;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          "
+        >
+          <tbody>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">Age</td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.age %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Retirement Age
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                 <%= fire.retireage %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Current Expense
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= fire.currentExpense %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">Inflation</td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.inflation %> %
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Monthly Savings
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= fire.monthlysavings %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Retirement Savings
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= fire.retirementsavings %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Prereturn percentage
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.prereturn %> %
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Postreturn percentage
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.postreturn %> %
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Expectancy
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.expectancy %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Start Date
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= fire.startDate %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2
+        style="
+          color: rgba(212, 31, 31, 0.966);
+          text-align: center;
+          margin-top: 5px;
+          font-size: 18px;
+        "
+      >
+        Retirement plan Calculations
+      </h2>
+      <div
+        style="
+          text-align: center;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 20px;
+        "
+      >
+        <table
+          style="
+            border: 1px solid #8d8d8d;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          "
+        >
+          <tbody>
+            <tr>
+              <td style="padding: 4px;text-align: left; width: 50%; border: 1px solid #8d8d8d">
+                Years Left For Retirement
+              </td>
+              <td style="padding: 4px;text-align: left; width: 50%; border: 1px solid #8d8d8d">
+                <%= value.yearsLeftForRetirement %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Monthly Expenses After Retirement
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.monthlyExpensesAfterRetirement %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Targeted Savings
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.targetedSavings %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Total Savings at Retirement
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.totalSavingsAtRetirement %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Accumulated Savings
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.accumulatedSavings %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Short fallIn Savings
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.shortfallInSavings %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Existing Savings Growth
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.existingSavingsGrowth %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ExtraOne Time Savings Required
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.extraOneTimeSavingsRequired %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Lumpsum Investment Needed
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.lumpsumInvestmentNeeded %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Extra Monthly Savings Required
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.extraMonthlySavingsRequired %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Annual StepUp Percentage
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= value.annualStepUpPercentage %> % 
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Yearly Investment
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                ₹ <%= value.yearlyInvestment %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                Retirement Date
+              </td>
+              <td style="padding: 4px;text-align: left; border: 1px solid #8d8d8d">
+                <%= value.retirementDate %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2
+        style="
+          color: rgba(212, 31, 31, 0.966);
+          text-align: center;
+          margin-top: 5px;
+          font-size: 18px;
+        "
+      >
+        Retirement withdraw plan
+      </h2>
+      <div
+        style="
+          text-align: center;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 20px;
+        "
+      >
+        <table
+          style="
+            border: 1px solid #8d8d8d;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          "
+        >
+          <tbody>
+            <tr>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">Year</th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Withdrawal
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">Networth</th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                ReturnsRate
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Per Month Expenses
+              </th>
+            </tr>
+            <% withdraw.forEach(employee => { %>
+            <tr>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                <%= employee.year %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.withdrawal %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.networth %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.ReturnsRate %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.permonthexpenses %>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <h2
+        style="
+          color: rgba(212, 31, 31, 0.966);
+          text-align: center;
+          margin-top: 5px;
+          font-size: 18px;
+        "
+      >
+        withdraw plan for StepUp
+      </h2>
+      <div
+        style="
+          text-align: center;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 20px;
+        "
+      >
+        <table
+          style="
+            border: 1px solid #8d8d8d;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          "
+        >
+          <tbody>
+            <tr>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">Year</th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Withdrawal
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Stepup Returns
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Networth Stepup
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Per Month Expenses
+              </th>
+            </tr>
+            <% withdraw.forEach(employee => { %>
+            <tr>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                <%= employee.year %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.withdrawal %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.ReturnsStepup %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.networthStepup %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.permonthexpenses %>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <h2
+        style="
+          color: rgba(212, 31, 31, 0.966);
+          text-align: center;
+          margin-top: 5px;
+          font-size: 18px;
+        "
+      >
+        withdraw plan for SIP
+      </h2>
+      <div
+        style="
+          text-align: center;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 20px;
+        "
+      >
+        <table
+          style="
+            border: 1px solid #8d8d8d;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          "
+        >
+          <tbody>
+            <tr>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">Year</th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Withdrawal
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                SIP Returns
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Networth SIP
+              </th>
+              <th style="border: 1px solid #8d8d8d; padding: 8px">
+                Per Month Expenses
+              </th>
+            </tr>
+            <% withdraw.forEach(employee => { %>
+            <tr>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                <%= employee.year %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.withdrawal %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.ReturnSIP %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.networthSIP %>
+              </td>
+              <td style="border: 1px solid #8d8d8d; padding: 8px">
+                ₹ <%= employee.permonthexpenses %>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
