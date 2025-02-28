@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const googleSchema = new mongoose.Schema({
-  googleId: { type: String, required: true, unique: true }, // Ensure required
+  googleId: { type: String, required: true, unique: true },
   displayName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-}, {
-    timestamps: true 
-});
+  email: { type: String, required: true, unique: true }
+}, { timestamps: true });
 
+googleSchema.index({ googleId: 1, email: 1 }, { unique: true });
 
 module.exports = mongoose.model('Google', googleSchema);
+
 
 
 // const mongoose = require("mongoose");

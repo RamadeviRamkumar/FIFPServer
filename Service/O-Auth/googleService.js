@@ -36,13 +36,16 @@ exports.getGoogleLogoutUrl = () => {
 
 exports.handleLogout = (req) => {
   return new Promise((resolve, reject) => {
-    req.logout((err) => {
-      if (err) return reject(new Error("Error logging out"));
+    try {
+      req.logout(); // Express 4+ does not require a callback
       req.session = null;
       resolve();
-    });
+    } catch (error) {
+      reject(new Error("Error logging out"));
+    }
   });
 };
+
 
 exports.refreshToken = async (userId) => {
   try {
@@ -51,8 +54,19 @@ exports.refreshToken = async (userId) => {
       throw new Error("Refresh token not found");
     }
 
-    console.log("Refresh token logic needs implementation for user:", user);
-    return user.refreshToken;
+    const response = await axios.post('https://oauth2.googleapis.com/token', {
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET,
+      refresh_token: user.refreshToken,
+      grant_type: 'refresh_token',
+    });
+
+    if (response.data.access_token) {
+      console.log("New Access Token:", response.data.access_token);
+      return response.data.access_token;
+    } else {
+      throw new Error("Failed to refresh token");
+    }
   } catch (error) {
     console.error("Error refreshing token:", error.message);
     throw new Error("Error refreshing token: " + error.message);
