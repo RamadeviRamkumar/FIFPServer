@@ -12,21 +12,15 @@ exports.findUserByGoogleId = (googleId) => {
 };
 
 exports.createGoogleUser = (profile) => {
-  if (!profile.id || !profile.displayName || !profile.emails || !profile.emails[0]?.value) {
-    return Promise.reject(new Error("Invalid Google profile data"));
-  }
-
-  const newUser = new Google({
+  
+const newUser = new Google({
     googleId: profile.id,
     name: profile.displayName,
     email: profile.emails[0].value, // Ensuring safe access
   });
 
   return newUser.save()
-    .then(user => user)
-    .catch(error => {
-      throw new Error("Error creating new Google user: " + error.message);
-    });
+   
 };
 
 exports.findById = (id) => {

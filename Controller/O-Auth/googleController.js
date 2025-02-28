@@ -1,65 +1,72 @@
 const googleService = require("../../Service/O-Auth/googleService");
 
+// exports.loginSuccess = async (req, res) => {
+//   try {
+//     //#swagger.tags = ['Google-Login']
+//     if (req.user) {
+//       return res.status(201).json({
+//         success: true,
+//         message: "Successfully Logged In",
+//         user: req.user,
+//       });
+//     }
+//     return res.status(200).json({ error: true, message: "Not Authorized" });
+//   } catch (error) {
+//     return res.status(500).json({ error: true, message: error.message });
+//   }
+// };
 exports.loginSuccess = (req, res) => {
-  //#swagger.tags = ['Google-Login']
-  return new Promise((resolve, reject) => {
-    if (req.user) {
-      resolve({
-        success: true,
-        message: "Successfully Logged In",
-        user: req.user,
-      });
-    } else {
-      reject({ error: true, message: "Not Authorized" });
-    }
-  })
-    .then((data) => res.status(201).json(data))
-    .catch((error) => res.status(500).json(error));
+  console.log("User session data:", req.user); // Debugging
+
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "Successfully Logged In",
+      user: req.user,
+    });
+  } else {
+    res.status(401).json({ error: true, message: "Not Authorized" });
+  }
 };
 
-exports.loginFailed = (req, res) => {
-  //#swagger.tags = ['Google-Login']
-  return new Promise((resolve) => {
-    resolve({
-      success: true,
+
+exports.loginFailed = async (req, res) => {
+  try {
+    //#swagger.tags = ['Google-Login']
+    return res.status(401).json({
+      error: true,
       message: "Log in failure",
     });
-  })
-    .then((data) => res.status(201).json(data))
-    .catch((error) =>
-      res.status(500).json({ error: true, message: error.message })
-    );
+  } catch (error) {
+    return res.status(500).json({ error: true, message: error.message });
+  }
 };
 
-exports.logout = (req, res) => {
-  //#swagger.tags = ['Google-Login']
-  return new Promise((resolve, reject) => {
+exports.logout = async (req, res) => {
+  try {
+    //#swagger.tags = ['Google-Login']
     req.logout((err) => {
-      if (err) {
-        reject({ error: true, message: "Logout failed" });
-      } else {
-        req.session.destroy(() => {
-          resolve({ message: "Logged out successfully" });
-        });
-      }
+      if (err) return res.status(500).json({ error: true, message: "Logout failed" });
+      req.session.destroy(() => {
+        res.json({ message: "Logged out successfully" });
+      });
     });
-  })
-    .then((data) => res.status(201).json(data))
-    .catch((error) => res.status(500).json(error));
+  } catch (error) {
+    return res.status(500).json({ error: true, message: error.message });
+  }
 };
 
 exports.handleAuthSuccess = (req, res) => {
-  //#swagger.tags = ['Google-Login']
-  return new Promise((resolve, reject) => {
+  try {
+    //#swagger.tags = ['Google-Login']
     if (!req.user) {
-      reject({ error: true, message: "User not authenticated" });
-    } else {
-      resolve({
-        message: "Authentication Successful",
-        user: req.user,
-      });
+      return res.status(403).json({ error: true, message: "User not authenticated" });
     }
-  })
-    .then((data) => res.status(201).json(data))
-    .catch((error) => res.status(500).json(error));
+    return res.status(201).json({
+      message: "Authentication Successful",
+      user: req.user,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: true, message: error.message });
+  }
 };

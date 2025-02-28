@@ -17,13 +17,20 @@ router.get(
 );
 
 // Google callback route
-router.get(
-  "/callback",
-  passport.authenticate("google", {
-    successRedirect: process.env.CLIENT_URL || "/",
-    failureRedirect: "/login/failed",
-    session: false,
-  })
+// router.get(
+//   "/callback",
+//   passport.authenticate("google", {
+//     successRedirect: process.env.CLIENT_URL || "/",
+//     failureRedirect: "/login/failed",
+//     session: false,
+//   })
+// );
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login/failed" }),
+  (req, res) => {
+    res.redirect("/dashboard"); // Redirect after successful login
+  }
 );
 
 // Logout route
