@@ -1,14 +1,13 @@
-require('dotenv').config(); // Load environment variables at the top
-
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const googleService = require("../../Service/O-Auth/googleService");
+require('dotenv').config();
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.CLIENT_ID, 
-      clientSecret: process.env.CLIENT_SECRET, 
+      clientID: process.env.CLIENT_ID, // process.env.CLIENT_ID,
+      clientSecret: process.env.DATA,
       callbackURL: process.env.CALLBACK_URL,
       scope: ["profile", "email"],
     },
@@ -23,12 +22,10 @@ passport.use(
   )
 );
 
-// Serialize user (store user ID in session)
 passport.serializeUser((googleUser, done) => {
   done(null, googleUser);
 });
 
-// Deserialize user (retrieve user from session)
 passport.deserializeUser((googleUser, done) => {
   done(null, googleUser);
 });

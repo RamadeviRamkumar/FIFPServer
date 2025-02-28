@@ -1,5 +1,5 @@
 const googleDao = require("../../Dao/O-Auth/googleDao");
-require('dotenv').config();;
+require('dotenv').config();
 
 exports.createGoogleUser = async (profile) => {
   try {
@@ -12,7 +12,7 @@ exports.createGoogleUser = async (profile) => {
       const newUser = await googleDao.createGoogleUser({
         googleId: profile.id,
         displayName: profile.displayName,
-        // email: profile.emails[0]?.value,
+        email: profile.emails[0]?.value,
       });
       console.log("New User Created:", newUser);
       return newUser;
