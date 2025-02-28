@@ -26,10 +26,10 @@ router.get(
 //   })
 // );
 router.get(
-  "/auth/google/callback",
+  "/callback",
   passport.authenticate("google", { failureRedirect: "/login/failed" }),
   (req, res) => {
-    res.redirect("/dashboard"); // Redirect after successful login
+    res.redirect("https://fifpclub.com/userPage"); // Redirect after successful login
   }
 );
 
