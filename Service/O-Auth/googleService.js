@@ -3,34 +3,32 @@ require('dotenv').config();
 
 exports.createGoogleUser = async (profile) => {
   try {
-    console.log("Full Google Profile:", JSON.stringify(profile, null, 2));
+    console.log("Google Profile:", profile); // Debugging
 
-    const googleId = profile.id || profile.sub;
-    const displayName = profile.displayName || profile.name || profile.given_name || "Unknown User";
-    const email = profile.emails?.[0]?.value || "no-email@example.com"; 
-
-    if (!googleId || !email) {
-      console.error("Missing required Google user data:", { googleId, displayName, email });
-      throw new Error("Missing required Google user data.");
-    }
-
-    console.log("Extracted User Data:", { googleId, displayName, email });
-
-    const existingUser = await googleDao.findUserByGoogleId(googleId);
+    const existingUser = await googleDao.findUserByGoogleId(profile.id);
     if (existingUser) {
       console.log("Existing User Found:", existingUser);
       return existingUser;
-    }
+    } else {
+      // Ensure profile.id and profile.emails[0]?.value exist
+      if (!profile.id || !profile.emails || !profile.emails[0]?.value) {
+        throw new Error("Google profile missing required fields");
+      }
 
-    const newUser = await googleDao.createGoogleUser({ googleId, displayName, email });
-    console.log("New User Created:", newUser);
-    return newUser;
+      const newUser = await googleDao.createGoogleUser({
+        googleId: profile.id,  // Ensure this is set correctly
+        displayName: profile.displayName || profile.name?.givenName, 
+        email: profile.emails[0]?.value, 
+      });
+
+      console.log("New User Created:", newUser);
+      return newUser;
+    }
   } catch (error) {
     console.error("Error creating Google user:", error.message);
     throw new Error("Error creating Google user: " + error.message);
   }
 };
-
 
 exports.getGoogleLogoutUrl = () => {
   return `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${process.env.CLIENT_URL1}`;

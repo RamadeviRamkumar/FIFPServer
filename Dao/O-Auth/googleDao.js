@@ -13,8 +13,8 @@ exports.createGoogleUser = async (profile) => {
     const newUser = new Google({
       googleId: profile.id,
       name: profile.displayName,
-      email:profile.displayEmail
-      // email: profile.emails[0].value, 
+      // email:profile.displayEmail
+      email: profile.emails[0].value, 
     });
     return await newUser.save();
   } catch (error) {
