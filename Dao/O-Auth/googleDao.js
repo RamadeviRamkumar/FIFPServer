@@ -11,20 +11,35 @@ exports.findUserByGoogleId = (googleId) => {
     });
 };
 
-
-
-exports.createGoogleUser = (profile) => {
-  const newUser = new Google({
-    googleId: profile.googleId,
+exports.createGoogleUser = async (profile) => {
+  try {
+    const newUser = new User({
+      googleId: profile.googleId,
     name: profile.displayName,
     email: profile.email,
     accessToken: profile.accessToken,
     refreshToken: profile.refreshToken,
-    tokenExpiry: profile.tokenExpiry, // Save token expiry time
-  });
-
-  return newUser.save();
+    tokenExpiry: profile.tokenExpiry,
+    });
+    
+    return await newUser.save();
+  } catch (error) {
+    throw new Error("Error creating new user");
+  }
 };
+
+// exports.createGoogleUser = (profile) => {
+//   const newUser = new Google({
+//     googleId: profile.googleId,
+//     name: profile.displayName,
+//     email: profile.email,
+//     accessToken: profile.accessToken,
+//     refreshToken: profile.refreshToken,
+//     tokenExpiry: profile.tokenExpiry, // Save token expiry time
+//   });
+
+//   return newUser.save();
+// };
 
 
 exports.findById = (id) => {
