@@ -1,35 +1,29 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const googleService = require("../../Service/O-Auth/googleService");
-require('dotenv').config();
 
 passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: process.env.CALLBACK_URL,
-      scope: ["profile", "email"],
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        console.log("Received Google Profile:", JSON.stringify(profile, null, 2));
-        const user = await googleService.createGoogleUser(profile);
-        return done(null, user);
-      } catch (error) {
-        console.error("Google OAuth Error:", error);
-        return done(error, null);
-      }
-    }
-  )
+	new GoogleStrategy(
+		{
+			clientID: process.env.CLIENT_ID,
+			clientSecret: process.env.CLIENT_SECRET,
+			callbackURL: process.env.CALLBACK_URL,
+			scope: ["profile", "email"],
+		},
+		function (accessToken, refreshToken, profile, callback) {
+			console.log('Profile Data')
+			console.log(profile)
+			callback(null, profile);
+		}
+	)
 );
 
-passport.serializeUser((googleUser, done) => {
-  done(null, googleUser);
+passport.serializeUser((user, done) => {
+	done(null, user);
 });
 
-passport.deserializeUser((googleUser, done) => {
-  done(null, googleUser);
+passport.deserializeUser((user, done) => {
+	done(null, user);
 });
 
 module.exports = passport;

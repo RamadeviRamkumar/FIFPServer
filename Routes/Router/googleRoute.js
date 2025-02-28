@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Google = require("../../Controller/O-Auth/googleController");
 const passport = require("../../config/passport/google");
-require('dotenv').config();
+
 
 router.get("/login/success", Google.loginSuccess);
 
