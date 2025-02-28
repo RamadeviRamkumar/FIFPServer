@@ -1,26 +1,26 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// const googleSchema = new mongoose.Schema({
-//     googleId: { type: String, required: true },
-//     name: { type: String, required: true },
-//     email: { type: String, unique: true },
-// }, {
-//     timestamps: true 
-// });
-
-
-// module.exports = mongoose.model('Google', googleSchema);
-
-
-const mongoose = require("mongoose");
-
-const googleUserSchema = new mongoose.Schema({
-  googleId: { type: String, required: true, unique: true },
-  displayName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  createdAt: { type: Date, default: Date.now }
+const googleSchema = new mongoose.Schema({
+    googleId: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, unique: true },
+}, {
+    timestamps: true 
 });
 
-const GoogleUser = mongoose.model("GoogleUser", googleUserSchema);
 
-module.exports = GoogleUser;
+module.exports = mongoose.model('Google', googleSchema);
+
+
+// const mongoose = require("mongoose");
+
+// const googleUserSchema = new mongoose.Schema({
+//   googleId: { type: String, required: true, unique: true },
+//   displayName: { type: String, required: true },
+//   email: { type: String, required: true, unique: true },
+//   createdAt: { type: Date, default: Date.now }
+// });
+
+// const GoogleUser = mongoose.model("GoogleUser", googleUserSchema);
+
+// module.exports = GoogleUser;

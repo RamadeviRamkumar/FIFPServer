@@ -3,29 +3,25 @@ require('dotenv').config();
 
 exports.createGoogleUser = async (profile) => {
   try {
-    console.log("Full Google Profile Object:", JSON.stringify(profile, null, 2));
+    console.log("Full Google Profile:", JSON.stringify(profile, null, 2));
 
-    // Extract values safely
     const googleId = profile.id || profile.sub;
-    const displayName = profile.displayName || profile.name || profile.given_name;
-    const email = profile.emails?.[0]?.value;
+    const displayName = profile.displayName || profile.name || profile.given_name || "Unknown User";
+    const email = profile.emails?.[0]?.value || "no-email@example.com"; 
 
-    // Check if required fields are missing
-    if (!googleId || !displayName || !email) {
-      console.error("Missing required user data:", { googleId, displayName, email });
-      throw new Error("Missing required Google user data: googleId, displayName, or email");
+    if (!googleId || !email) {
+      console.error("Missing required Google user data:", { googleId, displayName, email });
+      throw new Error("Missing required Google user data.");
     }
 
     console.log("Extracted User Data:", { googleId, displayName, email });
 
-    // Check if user already exists
     const existingUser = await googleDao.findUserByGoogleId(googleId);
     if (existingUser) {
       console.log("Existing User Found:", existingUser);
       return existingUser;
     }
 
-    // Create new user
     const newUser = await googleDao.createGoogleUser({ googleId, displayName, email });
     console.log("New User Created:", newUser);
     return newUser;

@@ -13,16 +13,16 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log("Google OAuth Profile:", JSON.stringify(profile, null, 2)); // Debugging
+        console.log("Received Google Profile:", JSON.stringify(profile, null, 2));
         const user = await googleService.createGoogleUser(profile);
         return done(null, user);
       } catch (error) {
+        console.error("Google OAuth Error:", error);
         return done(error, null);
       }
     }
   )
 );
-
 
 passport.serializeUser((googleUser, done) => {
   done(null, googleUser);
