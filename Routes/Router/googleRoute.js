@@ -25,7 +25,7 @@ router.get(
 //     session: false,
 //   })
 // );
-app.get(
+router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login/failed" }),
   (req, res) => {
