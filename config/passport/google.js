@@ -6,13 +6,14 @@ require('dotenv').config();
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.CLIENT_ID, // process.env.CLIENT_ID,
+      clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        console.log("Google OAuth Profile:", JSON.stringify(profile, null, 2)); // Debugging
         const user = await googleService.createGoogleUser(profile);
         return done(null, user);
       } catch (error) {
@@ -21,6 +22,7 @@ passport.use(
     }
   )
 );
+
 
 passport.serializeUser((googleUser, done) => {
   done(null, googleUser);
