@@ -1,33 +1,34 @@
 const googleService = require("../../Service/O-Auth/googleService");
 
-// exports.loginSuccess = async (req, res) => {
-//   try {
-//     //#swagger.tags = ['Google-Login']
-//     if (req.user) {
-//       return res.status(201).json({
-//         success: true,
-//         message: "Successfully Logged In",
-//         user: req.user,
-//       });
-//     }
-//     return res.status(200).json({ error: true, message: "Not Authorized" });
-//   } catch (error) {
-//     return res.status(500).json({ error: true, message: error.message });
-//   }
-// };
+
 exports.loginSuccess = (req, res) => {
-  console.log("User session data:", req.user); // Debugging
+  console.log("User session data:", req.user);
 
   if (req.user) {
     res.status(200).json({
       success: true,
       message: "Successfully Logged In",
       user: req.user,
+      sessionExpiresIn: 59 * 60 * 1000, // Send 59 minutes expiration time
     });
   } else {
     res.status(401).json({ error: true, message: "Not Authorized" });
   }
 };
+
+// exports.loginSuccess = (req, res) => {
+//   console.log("User session data:", req.user); // Debugging
+
+//   if (req.user) {
+//     res.status(200).json({
+//       success: true,
+//       message: "Successfully Logged In",
+//       user: req.user,
+//     });
+//   } else {
+//     res.status(401).json({ error: true, message: "Not Authorized" });
+//   }
+// };
 
 
 exports.loginFailed = async (req, res) => {

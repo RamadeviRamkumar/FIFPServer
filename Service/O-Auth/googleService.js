@@ -1,36 +1,78 @@
+// const googleDao = require("../../Dao/O-Auth/googleDao");
+// const axios = require("axios"); // Missing import for refresh token handling
+// require("dotenv").config();
+
+// exports.createGoogleUser = (profile) => {
+//   console.log("Google Profile:", profile); // Debugging
+
+//   return googleDao.findUserByGoogleId(profile.id)
+//     .then((existingUser) => {
+//       if (existingUser) {
+//         console.log("Existing User Found:", existingUser);
+//         return existingUser;
+//       }
+
+//       // Ensure profile.id and profile.emails[0]?.value exist
+//       if (!profile.id || !profile.emails || !profile.emails[0]?.value) {
+//         throw new Error("Google profile missing required fields");
+//       }
+
+//       return googleDao.createGoogleUser({
+//         googleId: profile.id, // Ensure this is set correctly
+//         displayName: profile.displayName || profile.name?.givenName,
+//         email: profile.emails[0]?.value,
+//       });
+//     })
+//     .then((newUser) => {
+//       console.log("New User Created:", newUser);
+//       return newUser;
+//     })
+//     .catch((error) => {
+//       console.error("Error creating Google user:", error.message);
+//       throw new Error("Error creating Google user: " + error.message);
+//     });
+// };
 const googleDao = require("../../Dao/O-Auth/googleDao");
-const axios = require("axios"); // Missing import for refresh token handling
+const axios = require("axios");
 require("dotenv").config();
 
-exports.createGoogleUser = (profile) => {
-  console.log("Google Profile:", profile); // Debugging
+exports.createGoogleUser = async (profile, accessToken, refreshToken, expiresIn) => {
+  console.log("Google Profile:", profile);
 
-  return googleDao.findUserByGoogleId(profile.id)
-    .then((existingUser) => {
-      if (existingUser) {
-        console.log("Existing User Found:", existingUser);
-        return existingUser;
-      }
+  if (!profile.id || !profile.emails || !profile.emails[0]?.value) {
+    throw new Error("Google profile missing required fields");
+  }
 
-      // Ensure profile.id and profile.emails[0]?.value exist
-      if (!profile.id || !profile.emails || !profile.emails[0]?.value) {
-        throw new Error("Google profile missing required fields");
-      }
+  try {
+    let user = await googleDao.findUserByGoogleId(profile.id);
+    if (user) {
+      console.log("Existing User Found:", user);
 
-      return googleDao.createGoogleUser({
-        googleId: profile.id, // Ensure this is set correctly
-        displayName: profile.displayName || profile.name?.givenName,
-        email: profile.emails[0]?.value,
-      });
-    })
-    .then((newUser) => {
-      console.log("New User Created:", newUser);
-      return newUser;
-    })
-    .catch((error) => {
-      console.error("Error creating Google user:", error.message);
-      throw new Error("Error creating Google user: " + error.message);
+      // Update user token and expiration time
+      user.accessToken = accessToken;
+      user.refreshToken = refreshToken;
+      user.tokenExpiry = Date.now() + expiresIn * 1000; // Convert expiry to milliseconds
+      await user.save();
+
+      return user;
+    }
+
+    // Create a new user if not found
+    user = await googleDao.createGoogleUser({
+      googleId: profile.id,
+      displayName: profile.displayName || profile.name?.givenName,
+      email: profile.emails[0]?.value,
+      accessToken,
+      refreshToken,
+      tokenExpiry: Date.now() + expiresIn * 1000,
     });
+
+    console.log("New User Created:", user);
+    return user;
+  } catch (error) {
+    console.error("Error creating Google user:", error.message);
+    throw new Error("Error creating Google user: " + error.message);
+  }
 };
 
 exports.getGoogleLogoutUrl = () => {

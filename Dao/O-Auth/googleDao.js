@@ -11,17 +11,21 @@ exports.findUserByGoogleId = (googleId) => {
     });
 };
 
+
+
 exports.createGoogleUser = (profile) => {
-  
-const newUser = new Google({
-    googleId: profile.id,
+  const newUser = new Google({
+    googleId: profile.googleId,
     name: profile.displayName,
-    email: profile.emails[0].value, // Ensuring safe access
+    email: profile.email,
+    accessToken: profile.accessToken,
+    refreshToken: profile.refreshToken,
+    tokenExpiry: profile.tokenExpiry, // Save token expiry time
   });
 
-  return newUser.save()
-   
+  return newUser.save();
 };
+
 
 exports.findById = (id) => {
   return Google.findById(id)
@@ -34,13 +38,6 @@ exports.findById = (id) => {
     });
 };
 
-exports.create = (userData) => {
-  return Google.create(userData)
-    .then(user => user)
-    .catch(error => {
-      throw new Error("Error creating user: " + error.message);
-    });
-};
 
 exports.findByGoogleId = (googleId) => {
   return Google.findOne({ googleId })
